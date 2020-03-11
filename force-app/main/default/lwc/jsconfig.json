@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "c/campaignAnalysis": [
+                "campaignAnalysis/campaignAnalysis.js"
+            ],
+            "c/campaignAnalysisFilter": [
+                "campaignAnalysisFilter/campaignAnalysisFilter.js"
+            ],
+            "c/notesViewer": [
+                "notesViewer/notesViewer.js"
+            ],
+            "c/campaignAnalysisFilters": [
+                "campaignAnalysisFilters/campaignAnalysisFilters.js"
+            ],
+            "c/campaignReport": [
+                "campaignReport/campaignReport.js"
+            ]
+        }
+    },
+    "include": [
+        "**/*",
+        "../../../../.sfdx/typings/lwc/**/*.d.ts"
+    ],
+    "typeAcquisition": {
+        "include": [
+            "jest"
+        ]
+    }
+}

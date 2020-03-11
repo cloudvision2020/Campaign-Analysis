@@ -1,0 +1,120 @@
+<template >
+    <article class="slds-card">
+      <div class="slds-card__header slds-grid">
+      <header class="slds-media slds-media_center slds-has-flexi-truncate">
+          <div class="slds-media__figure">
+          <span class="slds-icon_container slds-icon-standard-account" title="account">
+              <svg class="slds-icon slds-icon_small" aria-hidden="true">
+              <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+              </svg>
+              <span class="slds-assistive-text">Analysis Magic</span>
+          </span>
+          </div>
+          <div class="slds-media__body">
+          <h2 class="slds-card__header-title">
+              <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Accounts">
+              <span>Analysis Magic</span>
+              </a>
+          </h2>
+          </div>
+          <div class="slds-no-flex">
+          </div>
+      </header>
+      </div>
+      <div class="slds-card__body slds-card__body_inner">
+          <p class="slds-p-horizontal_small">
+              <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Carrier Postage Type 
+                  <abbr title="required" class="slds-required">*</abbr>
+              </label>
+              <select class="slds-select" name = "optionSelect" style="width: auto;" onchange={changeHandler}>
+                  <option value="All">All</option>
+                  <option value="First Class">First Class</option>
+                  <option value="First Class Indicia">First Class Indicia</option>
+                  <option value="First Class Presort">First Class Presort</option>
+                  <option value="First Class, Old Stamps">First Class, Old Stamps</option>
+                  <option value="Non-Profit Indicia">Non-Profit Indicia</option>
+                  <option value="Non-profit Meter">Non-profit Meter</option>
+                  <option value="Non-Profit, big stamp">Non-Profit, big stamp</option>
+                  <option value="Non-Profit, two Stamps">Non-Profit, two Stamps</option>
+                  <option value="Nonprofit Indicia">Nonprofit Indicia</option>
+                  <option value="Presort First-Class">Presort First-Class</option>
+                  <option value="Presorted First Class">Presorted First Class</option>
+                  <option value="Unstamped RAE">Unstamped RAE</option>
+              </select>
+          </p>
+      </div><br/>
+      <footer class="slds-card__footer">
+      
+      </footer>
+  </article>
+    <lightning-card title="Campaign Analysis" icon-name="custom:custom63" style="max-width: 100%; overflow: auto;">
+        <div class="slds-card__body">
+            <div class="slds-scrollable_x" style="height:100%;">
+            <template if:true={campaigns.data}>
+                <table class="slds-table slds-table_bordered slds-table--header-fixed">
+                    <tr>
+                        <th><div class="">Campaign ID</div></th>
+                        <th><div class="">List Name</div></th>
+                        <th><div class="">Select</div></th>
+                        <th><div class=""># Solicited</div></th>
+                        <th><div class="">Start Date</div></th>
+                        <th><div class=""># of Gifts</div></th>
+                        <th><div class="">$ Amount of Gifts</div></th>
+                        <th><div class="">Response Rate</div></th>
+                        <th><div class="">Avg. Gift</div></th>
+                        <th><div class="">In / Out</div></th>
+                        <th><div class="">Total Cost</div></th>
+                        <th><div class="">Cost / Piece</div></th>
+                        <th><div class="">Net Cost / Donor</div></th>
+                        <th><div class="">$1,000+ Donors</div></th>
+                        <th><div class="">$500-$999 Donors</div></th>
+                        <th><div class="">$250-$499 Donors</div></th>
+                        <th><div class="">$100-$249 Donors</div></th>
+                        <th><div class="">$59-$99 Donors</div></th>
+                        <th><div class="">$25-$49 Donors</div></th>
+                        <th><div class="">$1-$24 Donors</div></th>
+                        <th><div class="">Signer</div></th>
+                        <th><div class="">Carrier Postage</div></th>
+                        <th><div class="">Carrier Size</div></th>
+                        <th><div class="">Reply Postage</div></th>
+                        <th><div class="">Double Sided</div></th>
+                        <th><div class="">Channel</div></th>
+                        <th><div class="">Detail Channel</div></th>
+                    </tr>
+                    <template for:each={campaigns.data} for:item="campaign">
+                        <tr key={campaign.Id}>
+                            <td>{campaign.Name}</td>
+                            <td>{campaign.Mailing_List__c}</td>
+                            <td>{campaign.List_Select__c}</td>
+                            <td>{campaign.NumberSent}</td>
+                            <td>{campaign.StartDate}</td>
+                            <td>{campaign.Total_Number_of_Donations_Received__c}</td>
+                            <td>{campaign.Donations__c}</td>
+                            <td>{campaign.Response_Rate__c}</td>
+                            <td>{campaign.Average_Gifts__c}</td>
+                            <td>{campaign.In_Out__c}</td>
+                            <td>{campaign.Total_Cost_of_Campaign__c}</td>
+                            <td>{campaign.Cost_Per_Piece__c}</td>
+                            <td>{campaign.Net_Cost_Donor__c}</td>
+                            <td>{campaign.X1_000_Donors__c}</td>
+                            <td>{campaign.X500_999_Donors__c}</td>
+                            <td>{campaign.X250_499_Donors__c}</td>
+                            <td>{campaign.X100_249_Donors__c}</td>
+                            <td>{campaign.X59_99_Donors__c}</td>
+                            <td>{campaign.X25_49_Donors__c}</td>
+                            <td>{campaign.X1_24_Donors__c}</td>
+                            <td>{campaign.Signer__c}</td>
+                            <td>{campaign.Postage_Type__c}</td>
+                            <td>{campaign.Carrier_Size__c}</td>
+                            <td>{campaign.Reply_Postage_Type__c}</td>
+                            <td>{campaign.Double_Sided__c}</td>
+                            <td>{campaign.Channel__c}</td>
+                            <td>{campaign.Detail_Channel__c}</td>
+                        </tr>
+                    </template>
+                </table>
+            </template>
+        </div>
+        </div>
+    </lightning-card>
+</template>

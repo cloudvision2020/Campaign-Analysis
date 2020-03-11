@@ -1,0 +1,80 @@
+<template>
+  <lightning-card title="Campaign Analysis" icon-name="custom:custom63" style="max-width: 100%; overflow: auto;">
+    <div class="slds-card__body">
+        <div class="slds-scrollable_x" style="height:100%;max-height:400px;overflow: auto;">
+        <template if:true={campaigns}>
+            <table class="slds-table slds-table_bordered slds-table--header-fixed">
+                <tr style="background-color: #c8d1e0;">
+                    <th><div class="">Campaign ID</div></th>
+                    <th><div class="">List Name</div></th>
+                    <th><div class="">Select</div></th>
+                    <th><div class=""># Solicited</div></th>
+                    <th><div class="">Start Date</div></th>
+                    <th><div class=""># of Gifts</div></th>
+                    <th><div class="">$ Amount of Gifts</div></th>
+                    <th><div class="">Response Rate</div></th>
+                    <th><div class="">Avg. Gift</div></th>
+                    <th><div class="">In / Out</div></th>
+                    <th><div class="">Total Cost</div></th>
+                    <th><div class="">Cost / Piece</div></th>
+                    <th><div class="">Net Cost / Donor</div></th>
+                    <th><div class="">$1,000+ Donors</div></th>
+                    <th><div class="">$500-$999 Donors</div></th>
+                    <th><div class="">$250-$499 Donors</div></th>
+                    <th><div class="">$100-$249 Donors</div></th>
+                    <th><div class="">$59-$99 Donors</div></th>
+                    <th><div class="">$25-$49 Donors</div></th>
+                    <th><div class="">$1-$24 Donors</div></th>
+                    <th><div class="">Signer</div></th>
+                    <th><div class="">Carrier Postage</div></th>
+                    <th><div class="">Carrier Size</div></th>
+                    <th><div class="">Reply Postage</div></th>
+                    <th><div class="">Double Sided</div></th>
+                    <th><div class="">Channel</div></th>
+                    <th><div class="">Detail Channel</div></th>
+                </tr>
+                <template for:each={campaigns} for:item="campaign">
+                    <tr key={campaign.Id}>
+                        <td>{campaign.Name}</td>
+                        <td>{campaign.Mailing_List__c}</td>
+                        <td>{campaign.List_Select__c}</td>
+                        <td>{campaign.NumberSent}</td>
+                        <td>{campaign.StartDate}</td>
+                        <td>{campaign.Total_Number_of_Donations_Received__c}</td>
+                        <td>{campaign.Donations__c}</td>
+                        <td>{campaign.Response_Rate__c}</td>
+                        <td>{campaign.Average_Gifts__c}</td>
+                        <td>{campaign.In_Out__c}</td>
+                        <td>{campaign.Total_Cost_of_Campaign__c}</td>
+                        <td>{campaign.Cost_Per_Piece__c}</td>
+                        <td>{campaign.Net_Cost_Donor__c}</td>
+                        <td>{campaign.X1_000_Donors__c}</td>
+                        <td>{campaign.X500_999_Donors__c}</td>
+                        <td>{campaign.X250_499_Donors__c}</td>
+                        <td>{campaign.X100_249_Donors__c}</td>
+                        <td>{campaign.X59_99_Donors__c}</td>
+                        <td>{campaign.X25_49_Donors__c}</td>
+                        <td>{campaign.X1_24_Donors__c}</td>
+                        <td>{campaign.Signer__c}</td>
+                        <td>{campaign.Postage_Type__c}</td>
+                        <td>{campaign.Carrier_Size__c}</td>
+                        <td>{campaign.Reply_Postage_Type__c}</td>
+                        <td>{campaign.Double_Sided__c}</td>
+                        <td>{campaign.Channel__c}</td>
+                        <td>{campaign.Detail_Channel__c}</td>
+                    </tr>
+                </template>
+            </table>
+        </template>
+    </div>
+   <!--<div style="height:300px;">
+        <lightning-datatable
+                key-field="Id"
+                data={campaigns}
+                columns={columns}
+                enable-infinite-loading="true">
+        </lightning-datatable>
+    </div>-->
+</div>
+</lightning-card>
+</template>

@@ -1,0 +1,57 @@
+<template>
+    <lightning-card icon-name="custom:custom18" class="slds-card">
+        <!-- lightning-button label="New" slot="actions" value={recordId} onclick={handleNewNoteClick}></lightning-button -->
+        <h1 slot="title">
+            Notes
+        </h1>
+        <p class="slds-p-horizontal_small">
+            <template if:true={notes.data}>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-size--1-of-1 slds-text-title_caps">
+                        <div class="slds-grid slds-wrap slds-p-vertical_x-small slds-gutters slds-border_bottom slds-theme_shade">
+                            <div class="slds-col slds-size_2-of-12">
+                                Subject
+                            </div>
+                            <div class="slds-col slds-size_7-of-12">
+                                Notes
+                            </div>
+                            <div class="slds-col slds-size_2-of-12">
+                                Date
+                            </div>
+                            <div class="slds-col slds-size_1-of-12">
+                            </div>
+                        </div>
+                    </div>
+                    <template for:each={notes.data} for:item="note">
+                        <div class="slds-size--1-of-1" key={note.Id}>
+                            <div class="slds-grid slds-wrap slds-p-vertical_x-small slds-gutters slds-border_bottom">
+                                <div class="slds-col slds-size_2-of-12">
+                                    <a data-value={note.Id} onclick={handleViewNoteClick} class="underline">
+                                        {note.Subject__c}
+                                    </a>
+                                </div>
+                                <div class="slds-col slds-size_7-of-12">
+                                    <lightning-formatted-rich-text value={note.Notes__c}></lightning-formatted-rich-text>
+                                </div>
+                                <div class="slds-col slds-size_2-of-12">
+                                    <lightning-formatted-date-time value={note.Date__c}></lightning-formatted-date-time><br/>
+                                    {note.Created_By__c}
+                                </div>
+                                <div class="slds-col slds-size_1-of-12">
+                                    <lightning-button-menu alternative-text="Show menu">
+                                        <lightning-menu-item value={note.Id} label="Edit" onclick={handleEditNoteClick} ></lightning-menu-item>
+                                        <lightning-menu-item value={note.Id} label="Delete" onclick={handleDeleteNoteClick} ></lightning-menu-item>
+                                    </lightning-button-menu>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </template>
+                </div>
+            </template>
+            <template if:false={notes.data}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </template>
+        </p>
+    </lightning-card>
+</template>

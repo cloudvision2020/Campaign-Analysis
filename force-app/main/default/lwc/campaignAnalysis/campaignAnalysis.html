@@ -1,0 +1,406 @@
+<template >
+    
+    <article class="slds-card">
+        <template if:true={showLoadingSpinner}>
+            <div >
+                <lightning-spinner class="spins" size="large"></lightning-spinner>
+            </div>
+        </template>
+        <div class="slds-card__header slds-grid">
+        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+            <div class="slds-media__figure">
+            <span class="slds-icon_container slds-icon-standard-account" title="account">
+                <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                </svg>
+                <span class="slds-assistive-text">Analysis Magic</span>
+            </span>
+            </div>
+            <div class="slds-media__body">
+            <h2 class="slds-card__header-title">
+                <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Accounts">
+                <span>Analysis Magic</span>
+                </a>
+            </h2>
+            </div>
+            <div class="slds-no-flex">
+                <lightning-button label="Search" variant="brand" onclick={getCampaignsReport}></lightning-button> 
+               
+            </div>
+        </header>
+        </div>
+        <hr style="margin: var(--lwc-spacingSmall,2rem) 0;">
+        <div class="slds-card__body slds-card__body_inner">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body" style="height: 25px;">
+                    <h2 class="slds-card__header-title">
+                        <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Accounts">
+                        <span>Package Attributes</span>
+                        </a>
+                    </h2>
+                </div>
+            </header>
+            <table style="margin-left: -1%;"> 
+                <tr style="height: 42px;">
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Carrier Postage Type </label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <select class="slds-select" name = "carrierPostage" style="width: 90%;" onchange={changeHandler}>
+                            <option value="All">All</option>
+                            <option value="First Class">First Class</option>
+                            <option value="First Class Indicia">First Class Indicia</option>
+                            <option value="First Class Presort">First Class Presort</option>
+                            <option value="First Class, Old Stamps">First Class, Old Stamps</option>
+                            <option value="Non-Profit Indicia">Non-Profit Indicia</option>
+                            <option value="Non-profit Meter">Non-profit Meter</option>
+                            <option value="Non-Profit, big stamp">Non-Profit, big stamp</option>
+                            <option value="Non-Profit, two Stamps">Non-Profit, two Stamps</option>
+                            <option value="Nonprofit Indicia">Nonprofit Indicia</option>
+                            <option value="Presort First-Class">Presort First-Class</option>
+                            <option value="Presorted First Class">Presorted First Class</option>
+                            <option value="Unstamped RAE">Unstamped RAE</option>
+                        </select>
+                    </td>
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Carrier Size</label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <select class="slds-select" name = "carrierSize" style="width: 90%;" onchange={changeHandler} >
+                            <option value="All">All</option>
+                            <option value="#10">#10</option>
+                            <option value="#11">#11</option>
+                            <option value="#12">#12</option>
+                            <option value="#14">#14</option>
+                        </select>
+                    </td>
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Reply Postage Type </label>&nbsp;
+                    </td>
+                    <td style="width: 19%;text-align:left;">
+                        <select class="slds-select" name = "replyPostageType" style="width: 90%;" onchange={changeHandler}>
+                            <option value="All">All</option>
+                            <option value="BRE">BRE</option>
+                            <option value="First Class">First Class</option>
+                            <option value="Non-Profit">Non-Profit</option>
+                            <option value="Unstamped RAE">Unstamped RAE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr style="height: 42px;">
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Double Sided Printing</label>&nbsp;
+                    </td>
+                   <!-- <td style="width: 18%;text-align:left;">
+                        <select class="slds-select" name = "doubleSidedPrinting" style="width: 90%;" onchange={changeHandler}>
+                            <option value="All">All</option>
+                            <option value="#10">#10</option>
+                            <option value="#11">#11</option>
+                            <option value="#12">#12</option>
+                            <option value="#14">#14</option>
+                        </select>
+                    </td>-->
+                    <td style="width: 18%;text-align:left;">
+                        <lightning-input type="checkbox" unchecked value="" name="doubleSidedPrinting" ></lightning-input>
+                    </td>
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Signer </label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <select class="slds-select" name = "signer" style="width: 90%;" onchange={changeHandler}>
+                            <option value="All">All</option>
+                            <option value="Alex Mooney">Alex Mooney</option>
+                            <option value="Ann Coulter">Ann Coulter</option>
+                            <option value="Bobby Jindal">Bobby Jindal</option>
+                            <option value="Cabot Phillips">Cabot Phillips</option>
+                            <option value="David Blair">David Blair</option>
+                            <option value="David Horowitz">David Horowitz</option>
+                            <option value="Ed Meese">Ed Meese</option>
+                            <option value="Greg Abbott">Greg Abbott</option>
+                            <option value="Hayden Williams">Hayden Williams</option>
+                            <option value="James Inhofe">James Inhofe</option>
+                            <option value="James O'Keefe">James O'Keefe</option>
+                            <option value="Jerry Falwell">Jerry Falwell</option>
+                            <option value="Jim DeMint">Jim DeMint</option>
+                            <option value="John Cornyn">John Cornyn</option>
+                            <option value="Joseph Coors">Joseph Coors</option>
+                            <option value="Ken Cuccinelli">Ken Cuccinelli</option>
+                            <option value="Laura Ingraham">Laura Ingraham</option>
+                            <option value="Lawrence Jones">Lawrence Jones</option>
+                            <option value="Mark Levin">Mark Levin</option>
+                            <option value="Mark Meadows">Mark Meadows</option>
+                            <option value="Michele Bachmann">Michele Bachmann</option>
+                            <option value="Michelle Malkin">Michelle Malkin</option>
+                            <option value="Mike Lee">Mike Lee</option>
+                            <option value="Mike Pence">Mike Pence</option>
+                            <option value="Morton Blackwell">Morton Blackwell</option>
+                            <option value="Nikki Haley">Nikki Haley</option>
+                            <option value="Rand Paul">Rand Paul</option>
+                            <option value="Star Parker">Star Parker</option>
+                            <option value="Sterling Beard">Sterling Beard</option>
+                            <option value="Ted Cruz">Ted Cruz</option>
+                            <option value="Tom Coburn">Tom Coburn</option>
+                            <option value="Tom DeLay">Tom DeLay</option>
+                            <option value="Yvonne Dean-Bailey">Yvonne Dean-Bailey</option>
+                        </select>
+                    </td>
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Channel</label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <select class="slds-select" name = "channel" style="width: 90%;" onchange={changeHandler}>
+                            <option value="All">All</option>
+                            <option value="#10">Digital</option>
+                            <option value="#11">Mail</option>
+                            <option value="#12">Personal Solicitation</option>
+                            <option value="#14">Radio</option>
+                            <option value="#14">Telemarketing</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        <hr style="margin: var(--lwc-spacingSmall,2rem) 0;"> 
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body" style="height: 25px;">
+                    <h2 class="slds-card__header-title">
+                        <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Accounts">
+                        <span>Appeal Details</span>
+                        </a>
+                    </h2>
+                </div>
+            </header>
+            <table style="margin-left: -1%;"> 
+                <tr style="height: 42px;">
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Appeal Start Date </label>&nbsp;
+                   </td>
+                    <td style="width: 18%;text-align:left;">
+                        <lightning-input type="date" name="AppealStartDate"  style="width: 90%;margin-top:-15px;"></lightning-input>
+                    </td>
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Appeal Id From</label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <lightning-input type="text" name="AppealIdFrom"  style="width: 90%;margin-top:-15px;"></lightning-input>
+                    </td>
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Type </label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <select class="slds-select" name ="type" style="width: 90%;" onchange={changeHandler}>
+                            <option value="All">All</option>
+                            <option value="First Class">First Class</option>
+                            <option value="First Class Indicia">First Class Indicia</option>
+                            <option value="First Class Presort">First Class Presort</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr style="height: 42px;">
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Appeal End Date </label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <lightning-input type="date" name="AppealEndDate"  style="width: 90%;margin-top:-15px;"></lightning-input>
+                    </td>
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Appeal Id To</label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <lightning-input type="text" name="AppealIdTo"  style="width: 90%;margin-top:-15px;"></lightning-input>
+                    </td>
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Appeal Id Like</label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <lightning-input type="text" name="AppealIdLike"  style="width: 90%;margin-top:-15px;"></lightning-input>
+                    </td>
+                </tr>
+            </table>
+        <hr style="margin: var(--lwc-spacingSmall,2rem) 0;">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body" style="height: 25px;">
+                    <h2 class="slds-card__header-title">
+                        <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Accounts">
+                        <span>Options</span>
+                        </a>
+                    </h2>
+                </div>
+            </header>
+            <table style="margin-left: -1%;"> 
+                <tr style="height: 42px;">
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Do Not Repeat Header Row </label>
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <lightning-input type="checkbox"  unchecked value="" name="doNotRepeatHeaderRow" onchange={changeHandler}></lightning-input>
+                    </td>
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Calculate Doubling Time</label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <lightning-input type="checkbox" unchecked value="" name="calculateDoublingTime" onchange={changeHandler}></lightning-input>
+                    </td>
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Upgrade Analysis </label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <lightning-input type="checkbox" unchecked value="" name="upgradeAnalysis" onchange={changeHandler}></lightning-input>
+                    </td>
+                </tr>
+                <tr style="height: 42px;">
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Show Future Gifts</label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <lightning-input type="checkbox" unchecked value=""  name="showFutureGifts" onchange={changeHandler}></lightning-input>
+                    </td>
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Exclude Postage Discount </label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <lightning-input type="checkbox" unchecked value="" name="excludePostageDiscount" onchange={changeHandler}></lightning-input>
+                    </td>
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Future Gift Start Date</label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <lightning-input type="date" name="FutureGiftStartDate"  style="width: 90%;margin-top:-15px;"></lightning-input>
+                    </td>
+                </tr>
+                <tr style="height: 42px;">
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Show Percentage in Gift </label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <lightning-input type="checkbox" unchecked value="" name="showPercentageInGift" onchange={changeHandler}></lightning-input>
+                    </td>
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Show Target Ratio</label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <lightning-input type="checkbox" unchecked value="" name="showTargetRatio" onchange={changeHandler}></lightning-input>
+                    </td>
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Future Gift End Date</label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <lightning-input type="date" name="FutureGiftEndDate"  style="width: 90%;margin-top:-15px;"></lightning-input>
+                    </td>
+                </tr>
+            </table>
+            <!--Sorting and filtering section-->
+            <hr style="margin: var(--lwc-spacingSmall,2rem) 0;">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                
+                <div class="slds-media__body" style="height: 25px;">
+                    <h2 class="slds-card__header-title">
+                        <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Accounts">
+                        <span>Sorting &amp; Filtering</span>
+                        </a>
+                    </h2>
+                </div>
+            </header>
+            <div class="slds-no-flex" style="float:right">
+                <lightning-button label="Update" variant="brand" onclick={updateSorting}></lightning-button> 
+            
+            </div>
+            <br>
+            <table style="margin-left: -1%;"> 
+                <tr style="height: 42px;">
+                    <td style="width: 15%;text-align:right;">
+                        <label for="sortBy" class="slds-form-element__label slds-no-flex">Sort By </label>
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <select class="slds-select sortBy" name ="sortBy" style="width: 90%;">
+                            <option value="None">--None--</option>
+                            <option value="In_Out__c">In/Out</option>
+                            <option value="Response_Rate__c">Response Rate</option>
+                            
+                        </select>
+                    </td>
+                    <td style="width: 15%;text-align:right;">
+                        <label for="sortBy" class="slds-form-element__label slds-no-flex">Include Existing Donors </label>
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <select class="slds-select includeExistingDonors" name ="includeExistingDonors" style="width: 90%;">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </td>
+                    <td style="width: 15%;text-align:right;">
+                        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">Initial Gift Size </label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <lightning-input type="number" class="initialGiftSizeGreater" placeholder=">=" name="initialGiftSizeGreater"  style="width: 90%;margin-top:-15px;"></lightning-input>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <lightning-input type="number" class="initialGiftSizeSmaller" placeholder="&lt;="  name="initialGiftSizeSmaller"  style="width: 90%;margin-top:-15px;"></lightning-input>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 15%;text-align:right;">
+                        <label for="subtotaBy" class="slds-form-element__label slds-no-flex">Subtotal By</label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <select class="slds-select subtotalBy" name ="subtotalBy" style="width: 90%;" >
+                            <option value="None">None</option>
+                            <option value="List">List</option>
+                            <option value="Select">Select</option>
+                            <option value="List / Select">List / Select</option>
+                            <option value="Channel">Channel</option>
+                            <option value="Detail Channel">Detail Channel</option>
+                            <option value="Signer">Signer</option>
+                            <option value="Start date">Start date</option>
+                        </select>
+                    </td>
+                
+                    <td style="width: 15%;text-align:right;">
+                        <label for="subtotaBy" class="slds-form-element__label slds-no-flex">Estimated Costs </label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                        <lightning-input type="checkbox" class="estimatedCosts" unchecked value="" name="estimatedCosts" ></lightning-input>
+                    </td>
+               
+                  <td style="width: 15%;text-align:right;">
+                        <label for="subtotaBy" class="slds-form-element__label slds-no-flex">Initial Gift Date Range </label>&nbsp;
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                       <lightning-input placeholder=">=" aria-label=">=" class="InitialGiftRangeGreater" type="date" name="InitialGiftRangeGreater"  style="width: 90%;margin-top:-15px;"></lightning-input>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td style="width: 18%;text-align:left;">
+                       <lightning-input placeholder="&lt;=" type="date" class="InitialGiftRangeSmaller" name="InitialGiftRangeSmaller"  style="width: 90%;margin-top:-15px;"></lightning-input>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <footer class="slds-card__footer">
+        
+        </footer>
+    </article>
+    <br/>
+    <c-campaign-report campaigns={campaigns} > </c-campaign-report>
+</template>
